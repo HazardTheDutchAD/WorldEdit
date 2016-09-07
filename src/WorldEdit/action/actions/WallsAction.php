@@ -8,7 +8,7 @@ use WorldEdit\action\ActionHandler;
 use WorldEdit\action\WorldEditAction;
 use WorldEdit\selection\Selection;
 
-class SetAction implements WorldEditAction {
+class WallsAction implements WorldEditAction {
 
     /** @var ActionHandler */
     private $handler;
@@ -23,7 +23,7 @@ class SetAction implements WorldEditAction {
     private $blocksChanged = 0;
 
     /**
-     * SetAction constructor.
+     * WallsAction constructor.
      *
      * @param ActionHandler $handler
      * @param Selection $selection
@@ -44,14 +44,19 @@ class SetAction implements WorldEditAction {
     }
 
     public function start() {
-        $selection = $this->selection;
         $vector = new Vector3();
-        for($x = $selection->getMinX(); $x <= $selection->getMaxX(); $x++) {
-            for($y = $selection->getMinY(); $y <= $selection->getMaxY(); $y++) {
-                for($z = $selection->getMinZ(); $z <= $selection->getMaxZ(); $z++) {
-                    $selection->getPosition1()->getLevel()->setBlock($vector->setComponents($x, $y, $z), $this->block, true, false);
-                    $this->blocksChanged++;
-                }
+        $selection = $this->selection;
+        $level = $selection->getPosition1()->getLevel();
+        for($y = $selection->getMinY(); $y <= $selection->getMaxY(); $y++) {
+            for($x = $selection->getMinX(); $x <= $selection->getMaxX(); $x++) {
+                $level->setBlock($vector->setComponents($x, $y, $selection->getMinZ()), $this->block, true, false);
+                $level->setBlock($vector->setComponents($x, $y, $selection->getMaxZ()), $this->block, true, false);
+                $this->blocksChanged += 2;
+            }
+            for($z = $selection->getMinZ(); $z <= $selection->getMaxZ(); $z++) {
+                $level->setBlock($vector->setComponents($selection->getMinX(), $y, $z), $this->block, true, false);
+                $level->setBlock($vector->setComponents($selection->getMaxX(), $y, $z), $this->block, true, false);
+                $this->blocksChanged += 2;
             }
         }
     }

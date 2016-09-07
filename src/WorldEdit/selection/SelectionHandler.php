@@ -46,6 +46,16 @@ class SelectionHandler {
     }
 
     /**
+     * @param Player $player
+     * @return Selection
+     */
+    public function createSelection(Player $player) {
+        $selection = new Selection($this, $player);
+        $this->selections[$player->getName()] = $selection;
+        return $selection;
+    }
+
+    /**
      * @param Selection $selection
      */
     public function removeSelection(Selection $selection) {

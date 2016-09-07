@@ -55,42 +55,42 @@ class Selection {
      * @return mixed
      */
     public function getMaxX() {
-        return max($this->position1->x, $this->position2->x);
+        return max($this->position1->getFloorX(), $this->position2->getFloorX());
     }
 
     /**
      * @return mixed
      */
     public function getMinX() {
-        return min($this->position1->x, $this->position2->x);
+        return min($this->position1->getFloorX(), $this->position2->getFloorX());
     }
 
     /**
      * @return mixed
      */
     public function getMaxY() {
-        return max($this->position1->y, $this->position2->y);
+        return max($this->position1->getFloorY(), $this->position2->getFloorY());
     }
 
     /**
      * @return mixed
      */
     public function getMinY() {
-        return min($this->position1->y, $this->position2->y);
+        return min($this->position1->getFloorY(), $this->position2->getFloorY());
     }
 
     /**
      * @return mixed
      */
     public function getMaxZ() {
-        return max($this->position1->z, $this->position2->z);
+        return max($this->position1->getFloorZ(), $this->position2->getFloorZ());
     }
 
     /**
      * @return mixed
      */
     public function getMinZ() {
-        return min($this->position1->z, $this->position2->z);
+        return min($this->position1->getFloorZ(), $this->position2->getFloorZ());
     }
 
     /**
@@ -111,7 +111,7 @@ class Selection {
      * @return bool
      */
     public function isSelectionReady() {
-        return !(empty($this->position1) and empty($this->position2));
+        return !(empty($this->position1) or empty($this->position2));
     }
 
     public function remove() {

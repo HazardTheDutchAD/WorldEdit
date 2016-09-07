@@ -2,6 +2,9 @@
 
 namespace WorldEdit\action;
 
+use pocketmine\block\Block;
+use WorldEdit\action\actions\SetAction;
+use WorldEdit\selection\Selection;
 use WorldEdit\WorldEdit;
 
 class ActionHandler {
@@ -44,10 +47,25 @@ class ActionHandler {
     /**
      * @param WorldEditAction $action
      */
+    public function addAction(WorldEditAction $action) {
+        $this->actions[] = $action;
+    }
+
+    /**
+     * @param WorldEditAction $action
+     */
     public function removeAction(WorldEditAction $action) {
         if(in_array($action, $this->actions)) {
             unset($this->actions[array_search($action, $this->actions)]);
         }
+    }
+
+    public function set(Selection $selection, Block $block) {
+        $action = new SetAction($this, $selection, $block);
+        if($selection->isSelectionReady()) {
+            $action->start();
+        }
+        $action->stop();
     }
 
 }
