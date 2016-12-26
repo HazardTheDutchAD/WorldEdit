@@ -31,11 +31,11 @@ class WorldEdit extends PluginBase {
         $this->setSelectionHandler();
         $this->setActionHandler();
         $this->setCommandHandler();
-        $this->getLogger()->info("WorldEdit by @GiantQuartz was enabled");
+        $this->getLogger()->info("WorldEdit by @GiantAmethyst was enabled");
     }
 
     public function onDisable() {
-        $this->getLogger()->info("WorldEdit by @GiantQuartz was disabled");
+        $this->getLogger()->info("WorldEdit by @GiantAmethyst was disabled");
     }
 
     /**
