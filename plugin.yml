@@ -4,4 +4,4 @@ website: http://twitter.com/GiantAmethyst
 main: WorldEdit\WorldEdit
 description: An in-game voxel map editor for PocketMine-MP
 version: "1.0"
-api: [2.0.0]
+api: [3.0.0-ALPHA12]
